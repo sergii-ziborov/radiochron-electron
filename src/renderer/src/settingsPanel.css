@@ -1,0 +1,91 @@
+/* Retention settings. Deliberately plain: these controls delete data, so they
+   read as a form to be understood rather than a dashboard to be skimmed. */
+
+.settings-panel {
+  max-width: 780px;
+}
+
+.settings-panel h2 {
+  margin: 0 0 8px;
+}
+
+.settings-panel h3 {
+  margin: 18px 0 6px;
+  font-size: 0.95rem;
+}
+
+.settings-field {
+  display: block;
+  margin: 18px 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(252, 238, 10, 0.14);
+}
+
+.settings-field > span {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.settings-field input[type='number'] {
+  width: 110px;
+  padding: 6px 8px;
+  border: 1px solid rgba(252, 238, 10, 0.3);
+  background: #101009;
+  color: inherit;
+  font: inherit;
+}
+
+.settings-field small {
+  display: block;
+  margin-top: 6px;
+  opacity: 0.72;
+  line-height: 1.45;
+}
+
+.settings-field-inline {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+}
+
+.settings-field-inline input[type='checkbox'] {
+  grid-row: 1;
+}
+
+.settings-field-inline > span {
+  margin-bottom: 0;
+}
+
+.settings-field-inline small {
+  grid-column: 2;
+  margin-top: 0;
+}
+
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(252, 238, 10, 0.14);
+}
+
+.settings-status {
+  opacity: 0.8;
+}
+
+.settings-footprint table {
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.settings-footprint td {
+  padding: 3px 22px 3px 0;
+}
+
+.settings-footprint td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

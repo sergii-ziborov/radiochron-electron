@@ -75,6 +75,24 @@ declare global {
       getRadioChronChronicleRecent?: (options?: { maxEntries?: number }) => Promise<RadioChronChronicleRecent>;
       scanBluetooth?: (options?: { durationMs?: number; zone?: string | null }) => Promise<DesktopBleViewResult>;
       getBluetoothHistory?: () => Promise<DesktopBleHistoryArchive>;
+      getSettings?: () => Promise<{
+        retention: { detailDays: number; inventoryDays: number; purgeOnStartup: boolean };
+      }>;
+      updateSettings?: (patch: {
+        retention?: { detailDays?: number; inventoryDays?: number; purgeOnStartup?: boolean };
+      }) => Promise<{
+        retention: { detailDays: number; inventoryDays: number; purgeOnStartup: boolean };
+      }>;
+      getHistoryFootprint?: () => Promise<{
+        database_file: string;
+        size_bytes: number;
+        rows: Record<string, number>;
+      }>;
+      purgeExpiredHistory?: () => Promise<{
+        total_deleted: number;
+        reclaimed_bytes: number;
+        deleted: Record<string, number>;
+      }>;
       resetBluetoothTracker?: () => Promise<{ reset: true }>;
       scanLocalNetwork?: (options: {
         mode: LocalNetworkScanMode;

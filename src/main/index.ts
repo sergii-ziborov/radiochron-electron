@@ -21,6 +21,10 @@ import {
   restoreWindowsScanIdentity
 } from '../platform/windows/scanIdentity';
 import { getWindowsWifiProfileSecret } from '../platform/windows/wlanProfiles';
+import { historyFootprint, purgeExpiredHistory } from '../collector/retention';
+import type { RetentionReport } from '../collector/retention';
+import { loadSettings, saveSettings, settingsFilePath } from '../collector/settings';
+import type { AppSettings, RetentionSettings } from '../collector/settings';
 import { disposeRadioChronCoreClient, getRadioChronCoreClient } from 'radiochron';
 import { resetRadioChronBle, scanRadioChronBle } from '../platform/radiochronBle';
 import {
@@ -853,6 +857,52 @@ function desktopBleHistoryPath(): string {
   return join(app.getPath('userData'), 'radiochron', 'ble-history-v1.json');
 }
 
+function desktopSettingsPath(): string {
+  return settingsFilePath(app.getPath('userData'));
+}
+
+ipcMain.handle('settings:get', async (): Promise<AppSettings> => loadSettings(desktopSettingsPath()));
+
+ipcMain.handle(
+  'settings:update',
+  async (_event, patch?: { retention?: Partial<RetentionSettings> }): Promise<AppSettings> =>
+    saveSettings(desktopSettingsPath(), patch ?? {})
+);
+
+ipcMain.handle('retention:footprint', async () => historyFootprint());
+
+ipcMain.handle('retention:purge', async (): Promise<RetentionReport> => {
+  const settings = await loadSettings(desktopSettingsPath());
+  return purgeExpiredHistory(settings.retention);
+});
+
+/**
+ * Delete expired history now, and once a day for as long as the app runs.
+ *
+ * A desktop application is often left open for weeks, so a purge that only ran
+ * at launch would let a long session accumulate exactly the history the setting
+ * exists to bound.
+ */
+const PURGE_INTERVAL_MS = 24 * 60 * 60 * 1000;
+let purgeTimer: NodeJS.Timeout | null = null;
+
+async function purgeExpiredHistoryIfEnabled(): Promise<void> {
+  try {
+    const settings = await loadSettings(desktopSettingsPath());
+    if (!settings.retention.purgeOnStartup) return;
+
+    const report = purgeExpiredHistory(settings.retention);
+    if (report.total_deleted > 0) {
+      console.info(
+        `retention: removed ${report.total_deleted} row(s), reclaimed ${report.reclaimed_bytes} byte(s)`
+      );
+    }
+  } catch (error) {
+    // Never block startup on housekeeping.
+    console.warn('retention sweep failed', error);
+  }
+}
+
 async function startDesktopChronicle(): Promise<void> {
   const chronicleDir = join(app.getPath('userData'), 'chronicle');
   await mkdir(chronicleDir, { recursive: true });
@@ -871,6 +921,11 @@ app.whenReady().then(async () => {
     } catch (error) {
       console.warn('RadioChron chronicle could not start', error);
     }
+
+    await purgeExpiredHistoryIfEnabled();
+    purgeTimer = setInterval(() => {
+      void purgeExpiredHistoryIfEnabled();
+    }, PURGE_INTERVAL_MS);
   }
 
   createWindow();
@@ -889,5 +944,9 @@ app.on('window-all-closed', () => {
 });
 
 app.on('before-quit', () => {
+  if (purgeTimer) {
+    clearInterval(purgeTimer);
+    purgeTimer = null;
+  }
   disposeRadioChronCoreClient();
 });

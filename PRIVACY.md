@@ -27,6 +27,28 @@ resets the in-process detector.
 Source development may also use `data/`; that directory is excluded from Git
 and must be treated as sensitive.
 
+## Retention
+
+Nothing collected is kept indefinitely by default. Observations record which
+access points and Bluetooth devices were within range, when, and how strongly —
+evidence that is useful for diagnosis and, kept long enough, also a record of
+who was nearby. **Settings → Data retention** controls two windows:
+
+- **Individual sightings** — observations, collector events, identity alerts and
+  vulnerability scans. Default 30 days. This is the bulk of the database.
+- **The device list** — how long a device stays listed after it was last seen.
+  Default 90 days, deliberately longer: that something has been a fixture here
+  for months is worth keeping after the sightings that proved it are gone.
+
+Expired records are deleted at startup and once a day while the application
+runs, and the database is rebuilt afterwards so the disk space is actually
+returned rather than merely marked free. The same screen deletes on demand and
+reports what is currently stored.
+
+Either window may be set to zero, which keeps that category indefinitely. That
+is a deliberate choice an operator has to type: a damaged or unreadable settings
+file falls back to the defaults above rather than to "keep everything".
+
 ## Network activity
 
 - Baseline collection uses native RadioChron collectors. Windows uses the WLAN

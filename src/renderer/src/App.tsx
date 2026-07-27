@@ -19,6 +19,7 @@ import {
   type MapViewportSize
 } from './RadioMapViewport';
 import { RadioMapConnectionLayer } from './RadioMapConnections';
+import { SettingsPanel } from './SettingsPanel';
 import { radioMapRingStyle, radioMetricPointToViewport } from './radioMapGeometry';
 import { WifiReportsAnalytics } from './WifiReportsAnalytics';
 import accessPointVisualUrl from './assets/device-visuals/access-point.svg';
@@ -360,7 +361,7 @@ interface SourceControls {
   nearbyAps: boolean;
 }
 
-type AppTab = 'overview' | 'map' | 'network' | 'bluetooth' | 'reports' | 'channels';
+type AppTab = 'overview' | 'map' | 'network' | 'bluetooth' | 'reports' | 'channels' | 'settings';
 type WifiTab = Exclude<AppTab, 'bluetooth'>;
 
 type SourceControlKey = keyof SourceControls;
@@ -945,7 +946,11 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (activeTab !== 'bluetooth') lastWifiTabRef.current = activeTab;
+    // Settings is neither radio, so returning to Wi-Fi must land on the last
+    // real Wi-Fi section rather than bouncing straight back to settings.
+    if (activeTab !== 'bluetooth' && activeTab !== 'settings') {
+      lastWifiTabRef.current = activeTab;
+    }
   }, [activeTab]);
 
   const mergeNearbyNetworks = useCallback((nextNetworks: BaselineNetworksResult | null): BaselineNetworksResult | null => {
@@ -2049,8 +2054,8 @@ export function App() {
             <button
               type="button"
               data-radio-mode="wifi"
-              className={radioMode === 'wifi' ? 'active' : ''}
-              aria-pressed={radioMode === 'wifi'}
+              className={radioMode === 'wifi' && activeTab !== 'settings' ? 'active' : ''}
+              aria-pressed={radioMode === 'wifi' && activeTab !== 'settings'}
               onClick={() => setActiveTab(lastWifiTabRef.current)}
             >
               Wi-Fi
@@ -2065,8 +2070,18 @@ export function App() {
             >
               Bluetooth
             </button>
+            <button
+              type="button"
+              data-radio-mode="settings"
+              data-app-tab="settings"
+              className={activeTab === 'settings' ? 'active' : ''}
+              aria-pressed={activeTab === 'settings'}
+              onClick={() => setActiveTab('settings')}
+            >
+              Settings
+            </button>
           </div>
-          {radioMode === 'wifi' ? (
+          {activeTab === 'settings' ? null : radioMode === 'wifi' ? (
             <nav className="app-tabs" aria-label="Wi-Fi sections">
               {WIFI_TABS.map((tab) => (
                 <button
@@ -2174,6 +2189,8 @@ export function App() {
           </div>
         </div>
       ) : null}
+
+      {activeTab === 'settings' ? <SettingsPanel /> : null}
 
       {activeTab === 'map' || activeTab === 'network' || activeTab === 'channels' ? (
         <NetworkHistoryScrubber
