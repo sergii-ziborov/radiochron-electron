@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { DesktopBleHistoryArchive, DesktopBleViewResult } from '../../platform/bleHistory';
+import { BluetoothHistoryLog } from './BluetoothHistoryLog';
 import { BluetoothAnalytics } from './BluetoothAnalytics';
 import { BluetoothControls } from './BluetoothControls';
 import { BluetoothDeviceModal } from './BluetoothDeviceModal';
@@ -118,6 +119,9 @@ export function BluetoothPanel({ demoMode, activeView }: BluetoothPanelProps) {
         />
       ) : null}
       {activeView === 'devices' ? <BluetoothDevices devices={devices} onSelect={setSelectedDevice} /> : null}
+      {activeView === 'log' ? (
+        <BluetoothHistoryLog history={history ?? result?.analytics_history ?? null} />
+      ) : null}
       {activeView === 'history' ? <BluetoothAnalytics history={history ?? result?.analytics_history ?? null} /> : null}
       {activeView === 'findings' ? (
         <BluetoothFindings findings={result?.findings ?? []} history={history ?? result?.analytics_history ?? null} />

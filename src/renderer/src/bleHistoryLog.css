@@ -1,0 +1,38 @@
+/* The Bluetooth history log. A chronicle is read line by line, so this is a
+   table with generous row separation rather than a dashboard. */
+
+.ble-history-log h3 {
+  margin: 22px 0 6px;
+  font-size: 0.95rem;
+}
+
+.ble-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.ble-history-table th {
+  text-align: left;
+  padding: 4px 14px 6px 0;
+  border-bottom: 1px solid rgba(252, 238, 10, 0.26);
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.ble-history-table td {
+  padding: 5px 14px 5px 0;
+  border-bottom: 1px solid rgba(252, 238, 10, 0.08);
+}
+
+.ble-history-table td:first-child,
+.ble-history-table th:first-child {
+  white-space: nowrap;
+}
+
+.ble-history-warning {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border-left: 3px solid rgba(252, 238, 10, 0.6);
+  background: rgba(252, 238, 10, 0.07);
+}

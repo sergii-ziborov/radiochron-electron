@@ -9,6 +9,7 @@ import './bluetoothRelations.css';
 import './bluetoothDevices.css';
 import './wifiReportsAnalytics.css';
 import './settingsPanel.css';
+import './bleHistoryLog.css';
 import './radioTimeline.css';
 import './radioEvidence.css';
 import './radioPresence.css';
