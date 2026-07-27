@@ -26,8 +26,25 @@ export interface RetentionSettings {
   purgeOnStartup: boolean;
 }
 
+/**
+ * Theme identifiers, mirroring the registry shared with BranchPilot and
+ * repo-lens. Kept as a plain list here so the main process can validate a
+ * stored value without importing renderer code.
+ */
+export const THEME_IDS = [
+  'radiochron',
+  'light',
+  'dark',
+  'night-city',
+  'cyberpunk',
+  'deus-ex'
+] as const;
+
+export type ThemeId = (typeof THEME_IDS)[number];
+
 export interface AppSettings {
   retention: RetentionSettings;
+  theme: ThemeId;
 }
 
 /**
@@ -37,6 +54,7 @@ export interface AppSettings {
  */
 export interface SettingsPatch {
   retention?: Partial<RetentionSettings>;
+  theme?: string;
 }
 
 /**
@@ -49,7 +67,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
     detailDays: 30,
     inventoryDays: 90,
     purgeOnStartup: true
-  }
+  },
+  theme: 'radiochron'
 };
 
 /** Ten years. Anything beyond this is indistinguishable from "forever". */
@@ -68,11 +87,18 @@ function normalizeDays(value: unknown, fallback: number): number {
   return Math.min(rounded, MAX_DAYS);
 }
 
+function normalizeTheme(value: unknown): ThemeId {
+  return typeof value === 'string' && (THEME_IDS as readonly string[]).includes(value)
+    ? (value as ThemeId)
+    : DEFAULT_SETTINGS.theme;
+}
+
 export function normalizeSettings(raw: unknown): AppSettings {
   const source = (raw ?? {}) as Partial<AppSettings>;
   const retention = (source.retention ?? {}) as Partial<RetentionSettings>;
 
   return {
+    theme: normalizeTheme(source.theme),
     retention: {
       detailDays: normalizeDays(retention.detailDays, DEFAULT_SETTINGS.retention.detailDays),
       inventoryDays: normalizeDays(
@@ -115,6 +141,8 @@ export async function saveSettings(file: string, patch: SettingsPatch): Promise<
     ...patch,
     retention: { ...current.retention, ...(patch.retention ?? {}) }
   });
+  // normalizeSettings runs after the merge, so an unknown theme id from a
+  // tampered file or an older build falls back rather than being stored.
 
   await mkdir(dirname(file), { recursive: true });
   const temporary = `${file}.tmp`;

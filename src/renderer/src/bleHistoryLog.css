@@ -15,14 +15,14 @@
 .ble-history-table th {
   text-align: left;
   padding: 4px 14px 6px 0;
-  border-bottom: 1px solid rgba(252, 238, 10, 0.26);
+  border-bottom: 1px solid color-mix(in srgb, var(--rc-accent) 26.0%, transparent);
   font-weight: 600;
   opacity: 0.85;
 }
 
 .ble-history-table td {
   padding: 5px 14px 5px 0;
-  border-bottom: 1px solid rgba(252, 238, 10, 0.08);
+  border-bottom: 1px solid color-mix(in srgb, var(--rc-accent) 8.0%, transparent);
 }
 
 .ble-history-table td:first-child,
@@ -33,6 +33,6 @@
 .ble-history-warning {
   margin: 10px 0;
   padding: 8px 10px;
-  border-left: 3px solid rgba(252, 238, 10, 0.6);
-  background: rgba(252, 238, 10, 0.07);
+  border-left: 3px solid color-mix(in srgb, var(--rc-accent) 60.0%, transparent);
+  background: color-mix(in srgb, var(--rc-accent) 7.0%, transparent);
 }

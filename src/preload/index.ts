@@ -29,6 +29,7 @@ contextBridge.exposeInMainWorld('monitor', {
   getSettings: () => ipcRenderer.invoke('settings:get'),
   updateSettings: (patch: {
     retention?: { detailDays?: number; inventoryDays?: number; purgeOnStartup?: boolean };
+    theme?: string;
   }) => ipcRenderer.invoke('settings:update', patch),
   getHistoryFootprint: () => ipcRenderer.invoke('retention:footprint'),
   purgeExpiredHistory: () => ipcRenderer.invoke('retention:purge'),

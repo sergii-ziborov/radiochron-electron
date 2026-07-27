@@ -12,7 +12,7 @@
 }
 
 .ble-map-gesture-hint {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 0.63rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.02em;
 }
@@ -34,11 +34,11 @@
 }
 
 .ble-radio-node-strong {
-  --signal-color: #7ddb5a;
+  --signal-color: var(--rc-success);
 }
 
 .ble-radio-node-medium {
-  --signal-color: #fcee0a;
+  --signal-color: var(--rc-accent);
 }
 
 .ble-radio-node-weak {
@@ -46,11 +46,11 @@
 }
 
 .ble-radio-node-strong .map-node-avatar {
-  border-color: #7ddb5a;
+  border-color: var(--rc-success);
 }
 
 .ble-radio-node-medium .map-node-avatar {
-  border-color: #d5bb48;
+  border-color: var(--rc-accent-warm);
 }
 
 .ble-radio-node-weak .map-node-avatar {
@@ -63,7 +63,7 @@
   top: 68%;
   z-index: 3;
   max-width: 360px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   text-align: center;
   transform: translate(-50%, -50%);
 }
@@ -80,7 +80,7 @@
 
 .ble-map-side-group h3 {
   margin: 0 0 4px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 800 0.64rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -95,9 +95,9 @@
   align-items: center;
   padding: 8px 0;
   border: 0;
-  border-top: 1px solid rgba(252, 238, 10, 0.18);
+  border-top: 1px solid color-mix(in srgb, var(--rc-accent) 18.0%, transparent);
   background: transparent;
-  color: #eae6cb;
+  color: var(--rc-text-strong);
   font: inherit;
   text-align: left;
   cursor: pointer;
@@ -105,14 +105,14 @@
 
 .ble-map-list-row:hover strong,
 .ble-map-list-row:focus-visible strong {
-  color: #fcee0a;
+  color: var(--rc-accent);
 }
 
 .ble-map-list-row .map-memory-avatar {
   display: grid;
   place-items: center;
   overflow: hidden;
-  border: 1px solid rgba(252, 238, 10, 0.28);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 28.0%, transparent);
   background: #10120e;
 }
 
@@ -141,12 +141,12 @@
 
 .ble-map-list-row small {
   margin-top: 3px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font-size: 0.64rem;
 }
 
 .ble-map-list-row b {
-  color: #fcee0a;
+  color: var(--rc-accent);
   font: 800 0.62rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 

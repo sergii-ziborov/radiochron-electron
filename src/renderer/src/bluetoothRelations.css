@@ -17,7 +17,7 @@
 }
 
 .ble-map-filterbar label span {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 700 0.56rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
   text-transform: uppercase;
 }
@@ -26,9 +26,9 @@
 .ble-map-filterbar select,
 .ble-map-filterbar button {
   min-height: 34px;
-  border: 1px solid rgba(252, 238, 10, 0.35);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 35.0%, transparent);
   background: #10120e;
-  color: #eae6cb;
+  color: var(--rc-text-strong);
   font: 700 0.66rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
@@ -45,8 +45,8 @@
 
 .ble-map-filterbar button:hover,
 .ble-map-filterbar button.active {
-  border-color: #fcee0a;
-  color: #fcee0a;
+  border-color: var(--rc-accent);
+  color: var(--rc-accent);
 }
 
 .ble-system-zone {
@@ -56,8 +56,8 @@
   top: 78%;
   z-index: 1;
   height: 20%;
-  border: 1px dashed rgba(143, 139, 109, 0.32);
-  background: linear-gradient(180deg, rgba(143, 139, 109, 0.02), rgba(143, 139, 109, 0.08));
+  border: 1px dashed color-mix(in srgb, var(--rc-muted) 32.0%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--rc-muted) 2.0%, transparent), color-mix(in srgb, var(--rc-muted) 8.0%, transparent));
   pointer-events: none;
 }
 
@@ -65,7 +65,7 @@
   position: absolute;
   left: 8px;
   top: 6px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 700 0.5rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
   text-transform: uppercase;
 }
@@ -80,9 +80,9 @@
   gap: 7px;
   align-items: center;
   padding: 5px;
-  border: 1px dashed rgba(143, 139, 109, 0.62);
+  border: 1px dashed color-mix(in srgb, var(--rc-muted) 62.0%, transparent);
   background: rgba(15, 17, 13, 0.95);
-  color: #eae6cb;
+  color: var(--rc-text-strong);
   font: inherit;
   text-align: left;
   transform: translate(-50%, -50%);
@@ -91,23 +91,23 @@
 
 .ble-system-canvas-node.connected {
   border-style: solid;
-  border-color: #7ddb5a;
+  border-color: var(--rc-success);
 }
 
 .ble-system-canvas-node.paired {
-  border-color: #d5bb48;
+  border-color: var(--rc-accent-warm);
 }
 
 .ble-system-canvas-node.selected,
 .ble-system-canvas-node:hover {
-  box-shadow: 0 0 0 3px rgba(252, 238, 10, 0.18);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rc-accent) 18.0%, transparent);
 }
 
 .ble-system-canvas-node .map-memory-avatar {
   width: 30px;
   height: 30px;
   overflow: hidden;
-  border: 1px solid rgba(252, 238, 10, 0.28);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 28.0%, transparent);
 }
 
 .ble-system-canvas-node img {
@@ -130,12 +130,12 @@
 
 .ble-system-canvas-node small {
   margin-top: 2px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font-size: 0.49rem;
 }
 
 .map-connection-paired {
-  color: #d5bb48;
+  color: var(--rc-accent-warm);
 }
 
 .map-connection-paired .map-connection-edge,
@@ -150,7 +150,7 @@
   z-index: 8;
   max-width: min(460px, calc(100% - 24px));
   padding: 9px 12px;
-  border: 1px solid rgba(252, 238, 10, 0.55);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 55.0%, transparent);
   background: rgba(10, 12, 8, 0.96);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.42);
 }
@@ -161,7 +161,7 @@
 }
 
 .ble-relation-detail strong {
-  color: #fcee0a;
+  color: var(--rc-accent);
   font: 800 0.68rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 

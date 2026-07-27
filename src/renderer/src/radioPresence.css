@@ -16,7 +16,7 @@
 .radio-presence-heading > div > span {
   display: block;
   margin-top: 5px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font-size: 0.72rem;
 }
 
@@ -27,7 +27,7 @@
 .radio-presence-heading label span {
   display: block;
   margin-bottom: 4px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 700 0.6rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   text-transform: uppercase;
 }
@@ -46,7 +46,7 @@
 .radio-presence-filters button {
   min-height: 29px;
   padding: 0 9px;
-  border: 1px solid rgba(252, 238, 10, 0.25);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 25.0%, transparent);
   background: #11140e;
   color: #aaa782;
   font: 800 0.61rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
@@ -55,8 +55,8 @@
 }
 
 .radio-presence-filters button.active {
-  border-color: #fcee0a;
-  background: #fcee0a;
+  border-color: var(--rc-accent);
+  background: var(--rc-accent);
   color: #080a07;
 }
 
@@ -66,7 +66,7 @@
 
 .radio-presence-table-wrap {
   overflow: auto;
-  border-top: 1px solid rgba(252, 238, 10, 0.22);
+  border-top: 1px solid color-mix(in srgb, var(--rc-accent) 22.0%, transparent);
 }
 
 .radio-presence-table {
@@ -78,13 +78,13 @@
 .radio-presence-table th,
 .radio-presence-table td {
   padding: 9px 8px;
-  border-bottom: 1px solid rgba(252, 238, 10, 0.13);
+  border-bottom: 1px solid color-mix(in srgb, var(--rc-accent) 13.0%, transparent);
   text-align: left;
   vertical-align: top;
 }
 
 .radio-presence-table th {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 800 0.58rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   text-transform: uppercase;
 }
@@ -100,7 +100,7 @@
 
 .radio-presence-table small {
   margin-top: 3px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font-size: 0.61rem;
 }
 
@@ -114,7 +114,7 @@
 
 .radio-pattern-new,
 .radio-window-stable {
-  color: #7ddb5a;
+  color: var(--rc-success);
 }
 
 .radio-pattern-stable {
@@ -123,7 +123,7 @@
 
 .radio-pattern-weekday,
 .radio-pattern-recurring {
-  color: #fcee0a;
+  color: var(--rc-accent);
 }
 
 .radio-pattern-intermittent,
@@ -137,7 +137,7 @@
 }
 
 .radio-window-insufficient {
-  color: #8f8b6d;
+  color: var(--rc-muted);
 }
 
 .radio-presence-empty {

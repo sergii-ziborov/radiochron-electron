@@ -22,10 +22,10 @@
 .ble-device-filters input,
 .ble-device-filters select {
   height: 30px;
-  border: 1px solid rgba(252, 238, 10, 0.35);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 35.0%, transparent);
   border-radius: 0;
-  background: #0d0d08;
-  color: #eae6cb;
+  background: var(--rc-bg-deep);
+  color: var(--rc-text-strong);
   padding: 4px 9px;
 }
 
@@ -46,13 +46,13 @@
 .ble-device-table th,
 .ble-device-table td {
   padding: 11px 12px;
-  border-bottom: 1px solid rgba(252, 238, 10, 0.14);
+  border-bottom: 1px solid color-mix(in srgb, var(--rc-accent) 14.0%, transparent);
   text-align: left;
   vertical-align: top;
 }
 
 .ble-device-table th {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 700 0.66rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -63,7 +63,7 @@
 }
 
 .ble-device-table tbody tr:hover {
-  background: rgba(252, 238, 10, 0.05);
+  background: color-mix(in srgb, var(--rc-accent) 5.0%, transparent);
 }
 
 .ble-device-table td button {
@@ -71,7 +71,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: #fcee0a;
+  color: var(--rc-accent);
   font: inherit;
   font-weight: 800;
   cursor: pointer;
@@ -87,7 +87,7 @@
   max-width: 320px;
   margin-top: 4px;
   overflow: hidden;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font-size: 0.69rem;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -95,7 +95,7 @@
 
 .ble-table-empty {
   padding: 42px;
-  color: #8f8b6d;
+  color: var(--rc-muted);
   text-align: center;
 }
 
@@ -114,8 +114,8 @@
   max-height: 90vh;
   overflow: auto;
   padding: 18px;
-  border: 1px solid #fcee0a;
-  background: #171712;
+  border: 1px solid var(--rc-accent);
+  background: var(--rc-surface);
   box-shadow: 0 18px 80px rgba(0, 0, 0, 0.65);
 }
 
@@ -125,17 +125,17 @@
   justify-content: space-between;
   gap: 16px;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(252, 238, 10, 0.22);
+  border-bottom: 1px solid color-mix(in srgb, var(--rc-accent) 22.0%, transparent);
 }
 
 .ble-device-modal h2 {
   margin: 4px 0;
-  color: #fcee0a;
+  color: var(--rc-accent);
   font-size: 1.35rem;
 }
 
 .ble-device-modal header span {
-  color: #8f8b6d;
+  color: var(--rc-muted);
 }
 
 .ble-detail-grid {
@@ -151,12 +151,12 @@
   align-content: center;
   gap: 6px;
   padding: 10px;
-  border: 1px solid rgba(252, 238, 10, 0.16);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 16.0%, transparent);
   background: #10100c;
 }
 
 .ble-detail-fact span {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font-size: 0.68rem;
   text-transform: uppercase;
 }
@@ -175,11 +175,11 @@
 
 .ble-detail-section {
   padding: 14px 0;
-  border-top: 1px solid rgba(252, 238, 10, 0.16);
+  border-top: 1px solid color-mix(in srgb, var(--rc-accent) 16.0%, transparent);
 }
 
 .ble-detail-section h3 {
-  color: #fcee0a;
+  color: var(--rc-accent);
   text-transform: uppercase;
 }
 
@@ -198,7 +198,7 @@
 }
 
 .ble-detail-row span {
-  color: #8f8b6d;
+  color: var(--rc-muted);
 }
 
 .ble-detail-row code {

@@ -76,6 +76,39 @@ function deviceLabel(
   return `unnamed ${trackingKey.slice(-6)}`;
 }
 
+/**
+ * The archive as it stood at the end of one session.
+ *
+ * Slicing rather than filtering matters: a device's first-seen time and how
+ * often it had been observed are properties of everything up to that moment,
+ * not of the single scan. Rewinding the map should show what was known then,
+ * not today's totals pinned to an old timestamp.
+ */
+export function bleHistoryUpTo(
+  history: DesktopBleHistoryArchive | null,
+  sessionIndex: number
+): DesktopBleHistoryArchive | null {
+  if (!history || history.sessions.length === 0) return history;
+  const ordered = [...history.sessions].sort(
+    (left, right) => left.observed_at_ms - right.observed_at_ms
+  );
+  const bounded = Math.max(0, Math.min(sessionIndex, ordered.length - 1));
+  return { ...history, sessions: ordered.slice(0, bounded + 1) };
+}
+
+/** Tracking keys observed in one session, for showing only what was present. */
+export function bleKeysInSession(
+  history: DesktopBleHistoryArchive | null,
+  sessionIndex: number
+): Set<string> {
+  if (!history || history.sessions.length === 0) return new Set();
+  const ordered = [...history.sessions].sort(
+    (left, right) => left.observed_at_ms - right.observed_at_ms
+  );
+  const bounded = Math.max(0, Math.min(sessionIndex, ordered.length - 1));
+  return new Set(ordered[bounded].points.map(blePointTrackingKey));
+}
+
 export function summarizeBleHistoryLog(history: DesktopBleHistoryArchive | null): BleHistoryLog {
   const sessions = [...(history?.sessions ?? [])].sort(
     (left, right) => left.observed_at_ms - right.observed_at_ms

@@ -77,11 +77,14 @@ declare global {
       getBluetoothHistory?: () => Promise<DesktopBleHistoryArchive>;
       getSettings?: () => Promise<{
         retention: { detailDays: number; inventoryDays: number; purgeOnStartup: boolean };
+        theme: string;
       }>;
       updateSettings?: (patch: {
         retention?: { detailDays?: number; inventoryDays?: number; purgeOnStartup?: boolean };
+        theme?: string;
       }) => Promise<{
         retention: { detailDays: number; inventoryDays: number; purgeOnStartup: boolean };
+        theme: string;
       }>;
       getHistoryFootprint?: () => Promise<{
         database_file: string;

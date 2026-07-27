@@ -5,7 +5,7 @@
   align-items: center;
   gap: 3px;
   padding: 3px;
-  border: 1px solid rgba(252, 238, 10, 0.26);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 26.0%, transparent);
   background: rgba(0, 0, 0, 0.46);
 }
 
@@ -15,7 +15,7 @@
   min-height: 30px;
   border: 0;
   background: transparent;
-  color: #928f7b;
+  color: var(--rc-muted-2);
   cursor: pointer;
   font: 700 0.7rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.08em;
@@ -32,19 +32,19 @@
 .radio-mode-switch button.active,
 .bluetooth-view-switch button.active,
 .ble-window-switch button.active {
-  background: #fcee0a;
-  color: #0d0d08;
+  background: var(--rc-accent);
+  color: var(--rc-bg-deep);
 }
 
 .radio-mode-switch button:focus-visible,
 .bluetooth-view-switch button:focus-visible,
 .ble-window-switch button:focus-visible {
-  outline: 2px solid #fcee0a;
+  outline: 2px solid var(--rc-accent);
   outline-offset: 2px;
 }
 
 .radio-mode-context {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 0.68rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -102,7 +102,7 @@
 }
 
 .ble-chart-axis {
-  fill: #928f7b;
+  fill: var(--rc-muted-2);
   font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .ble-matrix thead th {
-  color: #928f7b;
+  color: var(--rc-muted-2);
   font: 0.63rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
   writing-mode: vertical-rl;
 }
@@ -151,7 +151,7 @@
 .ble-matrix tbody th {
   max-width: 220px;
   overflow: hidden;
-  color: #eae6cb;
+  color: var(--rc-text-strong);
   font: 0.72rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   text-align: left;
   text-overflow: ellipsis;
@@ -173,7 +173,7 @@
 }
 
 .ble-matrix-cell.medium {
-  background: #d5bb48;
+  background: var(--rc-accent-warm);
 }
 
 .ble-matrix-cell.weak {
@@ -198,7 +198,7 @@
 }
 
 .ble-analytics-table th {
-  color: #928f7b;
+  color: var(--rc-muted-2);
   font: 0.67rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -211,7 +211,7 @@
 
 .ble-analytics-table td small {
   margin-top: 4px;
-  color: #928f7b;
+  color: var(--rc-muted-2);
   font-size: 0.7rem;
 }
 

@@ -2,7 +2,7 @@
   min-height: 230px;
   display: grid;
   place-content: center;
-  color: #8f8b6d;
+  color: var(--rc-muted);
 }
 
 .radio-timeline {
@@ -20,7 +20,7 @@
 .radio-chart-selection > div {
   min-width: 0;
   padding: 7px 9px;
-  border: 1px solid rgba(252, 238, 10, 0.12);
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 12.0%, transparent);
   background: rgba(255, 255, 255, 0.018);
 }
 
@@ -33,14 +33,14 @@
 }
 
 .radio-chart-selection span {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 700 0.58rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   text-transform: uppercase;
 }
 
 .radio-chart-selection strong {
   margin-top: 3px;
-  color: #eae6cb;
+  color: var(--rc-text-strong);
   font: 800 0.69rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
@@ -61,12 +61,12 @@
 }
 
 .radio-chart-axis {
-  fill: #928f7b;
+  fill: var(--rc-muted-2);
   font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
 .radio-chart-cursor {
-  stroke: rgba(252, 238, 10, 0.68);
+  stroke: color-mix(in srgb, var(--rc-accent) 68.0%, transparent);
   stroke-dasharray: 3 4;
   stroke-width: 1.4;
 }
@@ -76,7 +76,7 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 12px;
-  color: #928f7b;
+  color: var(--rc-muted-2);
   font-size: 0.66rem;
 }
 

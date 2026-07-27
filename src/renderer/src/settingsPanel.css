@@ -6,7 +6,57 @@
 }
 
 .settings-panel h2 {
-  margin: 0 0 8px;
+  margin: 26px 0 8px;
+}
+
+.settings-panel h2:first-child {
+  margin-top: 0;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 8px;
+  margin: 14px 0 4px;
+}
+
+.theme-option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 9px;
+  align-items: center;
+  padding: 9px 11px;
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 22%, transparent);
+  background: var(--rc-surface-2);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.theme-option:hover {
+  border-color: color-mix(in srgb, var(--rc-accent) 55%, transparent);
+}
+
+.theme-option-active {
+  border-color: var(--rc-accent);
+  background: var(--rc-accent-bg);
+}
+
+.theme-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  grid-row: 1 / span 2;
+}
+
+.theme-name {
+  font-weight: 600;
+}
+
+.theme-option small {
+  grid-column: 2;
+  opacity: 0.7;
 }
 
 .settings-panel h3 {
@@ -18,7 +68,7 @@
   display: block;
   margin: 18px 0;
   padding-top: 14px;
-  border-top: 1px solid rgba(252, 238, 10, 0.14);
+  border-top: 1px solid color-mix(in srgb, var(--rc-accent) 14.0%, transparent);
 }
 
 .settings-field > span {
@@ -30,8 +80,8 @@
 .settings-field input[type='number'] {
   width: 110px;
   padding: 6px 8px;
-  border: 1px solid rgba(252, 238, 10, 0.3);
-  background: #101009;
+  border: 1px solid color-mix(in srgb, var(--rc-accent) 30.0%, transparent);
+  background: var(--rc-input-bg);
   color: inherit;
   font: inherit;
 }
@@ -69,7 +119,7 @@
   gap: 12px;
   margin-top: 20px;
   padding-top: 14px;
-  border-top: 1px solid rgba(252, 238, 10, 0.14);
+  border-top: 1px solid color-mix(in srgb, var(--rc-accent) 14.0%, transparent);
 }
 
 .settings-status {

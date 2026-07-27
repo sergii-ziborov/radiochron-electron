@@ -19,15 +19,15 @@
 }
 
 .report-export-button {
-  border-color: #fcee0a !important;
-  color: #fcee0a !important;
+  border-color: var(--rc-accent) !important;
+  color: var(--rc-accent) !important;
 }
 
 .report-export-status {
   margin: 0;
   padding: 7px 10px;
-  border-left: 3px solid #fcee0a;
-  background: rgba(252, 238, 10, 0.05);
+  border-left: 3px solid var(--rc-accent);
+  background: color-mix(in srgb, var(--rc-accent) 5.0%, transparent);
   color: #b7b292;
   font: 0.68rem/1.3 ui-monospace, SFMono-Regular, Consolas, monospace;
   word-break: break-all;
@@ -60,7 +60,7 @@
 }
 
 .wifi-chart-axis {
-  fill: #928f7b;
+  fill: var(--rc-muted-2);
   font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
@@ -68,7 +68,7 @@
   display: flex;
   justify-content: flex-end;
   gap: 14px;
-  color: #928f7b;
+  color: var(--rc-muted-2);
   font-size: 0.68rem;
 }
 
@@ -87,7 +87,7 @@
   min-height: 230px;
   display: grid;
   place-content: center;
-  color: #8f8b6d;
+  color: var(--rc-muted);
 }
 
 .wifi-report-breakdown-grid {
@@ -109,12 +109,12 @@
 .wifi-change-table th,
 .wifi-change-table td {
   padding: 9px 11px;
-  border-bottom: 1px solid rgba(252, 238, 10, 0.12);
+  border-bottom: 1px solid color-mix(in srgb, var(--rc-accent) 12.0%, transparent);
   text-align: left;
 }
 
 .wifi-change-table th {
-  color: #8f8b6d;
+  color: var(--rc-muted);
   font: 700 0.66rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;

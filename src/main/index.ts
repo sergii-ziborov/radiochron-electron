@@ -865,8 +865,10 @@ ipcMain.handle('settings:get', async (): Promise<AppSettings> => loadSettings(de
 
 ipcMain.handle(
   'settings:update',
-  async (_event, patch?: { retention?: Partial<RetentionSettings> }): Promise<AppSettings> =>
-    saveSettings(desktopSettingsPath(), patch ?? {})
+  async (
+    _event,
+    patch?: { retention?: Partial<RetentionSettings>; theme?: string }
+  ): Promise<AppSettings> => saveSettings(desktopSettingsPath(), patch ?? {})
 );
 
 ipcMain.handle('retention:footprint', async () => historyFootprint());

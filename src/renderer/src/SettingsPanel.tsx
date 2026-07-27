@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, type ReactElement } from 'react';
+import { APP_THEMES, applyTheme, DEFAULT_THEME } from './themes';
 
 interface RetentionSettings {
   detailDays: number;
@@ -44,6 +45,7 @@ function describeWindow(days: number): string {
 
 export function SettingsPanel(): ReactElement {
   const [retention, setRetention] = useState<RetentionSettings | null>(null);
+  const [theme, setTheme] = useState<string>(DEFAULT_THEME);
   const [footprint, setFootprint] = useState<HistoryFootprint | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -53,9 +55,17 @@ export function SettingsPanel(): ReactElement {
     if (!bridge?.getSettings) return;
     const settings = await bridge.getSettings();
     setRetention(settings.retention);
+    // Settings on disk win over the localStorage value the boot script used.
+    setTheme(applyTheme(settings.theme ?? DEFAULT_THEME));
     if (bridge.getHistoryFootprint) {
       setFootprint(await bridge.getHistoryFootprint());
     }
+  }, []);
+
+  const chooseTheme = useCallback(async (id: string) => {
+    // Applied first so the change is instant; persistence follows.
+    setTheme(applyTheme(id));
+    await window.monitor?.updateSettings?.({ theme: id });
   }, []);
 
   useEffect(() => {
@@ -107,6 +117,28 @@ export function SettingsPanel(): ReactElement {
 
   return (
     <section className="panel settings-panel">
+      <h2>Appearance</h2>
+      <p className="muted">
+        Every colour resolves through one palette, so a theme changes the whole
+        application rather than a header. Names match the other RadioChron tools.
+      </p>
+      <div className="theme-grid" role="radiogroup" aria-label="Theme">
+        {APP_THEMES.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            role="radio"
+            aria-checked={theme === option.id}
+            className={theme === option.id ? 'theme-option theme-option-active' : 'theme-option'}
+            onClick={() => void chooseTheme(option.id)}
+          >
+            <span className="theme-dot" style={{ background: option.dot }} aria-hidden="true" />
+            <span className="theme-name">{option.label}</span>
+            <small>{option.description}</small>
+          </button>
+        ))}
+      </div>
+
       <h2>Data retention</h2>
       <p className="muted">
         This application records the access points and Bluetooth devices around it, with times and

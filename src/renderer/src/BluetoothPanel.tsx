@@ -7,6 +7,8 @@ import { BluetoothDeviceModal } from './BluetoothDeviceModal';
 import { BluetoothDevices } from './BluetoothDevices';
 import { BluetoothFindings } from './BluetoothFindings';
 import { BluetoothMap } from './BluetoothMap';
+import { BluetoothMapScrubber } from './BluetoothMapScrubber';
+import { bleHistoryUpTo, bleKeysInSession } from './bleHistoryLog';
 import { BluetoothOverview } from './BluetoothOverview';
 import { buildBleWorkspaceDevices, type BleWorkspaceDevice } from './bleWorkspaceModel';
 import type { BluetoothView } from './bluetoothWorkspace';
@@ -24,10 +26,26 @@ export function BluetoothPanel({ demoMode, activeView }: BluetoothPanelProps) {
   const [selectedDevice, setSelectedDevice] = useState<BleWorkspaceDevice | null>(null);
   const [scanning, setScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  /** Null is live; an index rewinds the map to that recorded scan. */
+  const [historyIndex, setHistoryIndex] = useState<number | null>(null);
+  const archive = history ?? result?.analytics_history ?? null;
+
   const devices = useMemo(
-    () => buildBleWorkspaceDevices(result, history ?? result?.analytics_history ?? null),
-    [history, result]
+    () => buildBleWorkspaceDevices(result, archive),
+    [archive, result]
   );
+
+  // Devices as they stood at the selected scan: built from the archive sliced
+  // to that moment, then narrowed to the ones actually present in it.
+  const historicalDevices = useMemo(() => {
+    if (historyIndex === null) return null;
+    const present = bleKeysInSession(archive, historyIndex);
+    return buildBleWorkspaceDevices(null, bleHistoryUpTo(archive, historyIndex)).filter((device) =>
+      present.has(device.key)
+    );
+  }, [archive, historyIndex]);
+
+  const mapDevices = historicalDevices ?? devices;
 
   const scan = useCallback(async () => {
     if (!window.monitor?.scanBluetooth) {
@@ -74,6 +92,7 @@ export function BluetoothPanel({ demoMode, activeView }: BluetoothPanelProps) {
       setResult(null);
       setHistory(null);
       setSelectedDevice(null);
+      setHistoryIndex(null);
     } catch (nextError: unknown) {
       setError(nextError instanceof Error ? nextError.message : String(nextError));
     }
@@ -109,14 +128,27 @@ export function BluetoothPanel({ demoMode, activeView }: BluetoothPanelProps) {
         />
       ) : null}
       {activeView === 'map' ? (
-        <BluetoothMap
-          devices={devices}
-          zone={zone}
-          adapterCount={result?.scan.adapter_count ?? 0}
-          discoveryMode={result?.scan.discovery_mode ?? null}
-          lastScanMs={result?.scanned_at_ms ?? history?.sessions.at(-1)?.observed_at_ms ?? null}
-          onSelect={setSelectedDevice}
-        />
+        <>
+          <BluetoothMapScrubber
+            history={archive}
+            selectedIndex={historyIndex}
+            deviceCount={mapDevices.length}
+            onSelect={setHistoryIndex}
+            onLive={() => setHistoryIndex(null)}
+          />
+          <BluetoothMap
+            devices={mapDevices}
+            zone={zone}
+            adapterCount={result?.scan.adapter_count ?? 0}
+            discoveryMode={result?.scan.discovery_mode ?? null}
+            lastScanMs={
+              historyIndex === null
+                ? result?.scanned_at_ms ?? history?.sessions.at(-1)?.observed_at_ms ?? null
+                : bleHistoryUpTo(archive, historyIndex)?.sessions.at(-1)?.observed_at_ms ?? null
+            }
+            onSelect={setSelectedDevice}
+          />
+        </>
       ) : null}
       {activeView === 'devices' ? <BluetoothDevices devices={devices} onSelect={setSelectedDevice} /> : null}
       {activeView === 'log' ? (

@@ -1,0 +1,190 @@
+/* Theme tokens.
+ *
+ * Every colour in the application resolves through the sixteen roles below, so
+ * a theme is a palette rather than a fork of the stylesheet. Accent tints are
+ * produced with color-mix against --rc-accent, which is why hairlines and glows
+ * follow the theme instead of staying yellow under a blue one.
+ *
+ * The identifiers mirror the family registry used by BranchPilot and repo-lens
+ * so the same names mean the same thing across the tools. */
+
+:root,
+html[data-theme='radiochron'] {
+  --rc-bg: #14140e;
+  --rc-surface: #171712;
+  --rc-surface-2: #1c1b12;
+  --rc-surface-3: #292610;
+  --rc-input-bg: #101009;
+
+  --rc-accent: #fcee0a;
+  --rc-accent-hot: #fff45c;
+  --rc-accent-dim: #d9cd08;
+  --rc-accent-deep: #6e6607;
+  --rc-accent-bg: #241f0a;
+
+  --rc-text: #d9d5b8;
+  --rc-text-strong: #eae6cb;
+  --rc-muted: #8f8b6d;
+
+  --rc-danger: #ff4d3d;
+  --rc-danger-bg: #2a100d;
+  --rc-success: #7ddb5a;
+  --rc-success-bg: #12210e;
+  --rc-bg-deep: #0d0d08;
+  --rc-danger-deep: #6e2019;
+  --rc-success-deep: #2f5b26;
+  --rc-muted-2: #928f7b;
+  --rc-muted-3: #77745f;
+  --rc-accent-warm: #d5bb48;
+}
+
+/* Clean light. The only theme where the accent cannot also be the text colour,
+   so text goes near-black and the accent is reserved for emphasis. */
+html[data-theme='light'] {
+  --rc-bg: #ffffff;
+  --rc-surface: #f6f8fa;
+  --rc-surface-2: #eaeef2;
+  --rc-surface-3: #dde3e9;
+  --rc-input-bg: #ffffff;
+
+  --rc-accent: #2563eb;
+  --rc-accent-hot: #4b83f5;
+  --rc-accent-dim: #1d4ed8;
+  --rc-accent-deep: #1e3a8a;
+  --rc-accent-bg: #dbe6fe;
+
+  --rc-text: #1f2328;
+  --rc-text-strong: #06090d;
+  --rc-muted: #59636e;
+
+  --rc-danger: #cf222e;
+  --rc-danger-bg: #ffebe9;
+  --rc-success: #1a7f37;
+  --rc-success-bg: #dafbe1;
+  --rc-bg-deep: #f0f3f6;
+  --rc-danger-deep: #f8d7d5;
+  --rc-success-deep: #bfe6c8;
+  --rc-muted-2: #6e7781;
+  --rc-muted-3: #8c959f;
+  --rc-accent-warm: #9a6700;
+}
+
+html[data-theme='dark'] {
+  --rc-bg: #0d1117;
+  --rc-surface: #161b22;
+  --rc-surface-2: #1c2129;
+  --rc-surface-3: #262c36;
+  --rc-input-bg: #0b0f14;
+
+  --rc-accent: #2f81f7;
+  --rc-accent-hot: #6cb0ff;
+  --rc-accent-dim: #1f6feb;
+  --rc-accent-deep: #12406f;
+  --rc-accent-bg: #121d2f;
+
+  --rc-text: #c9d1d9;
+  --rc-text-strong: #f0f6fc;
+  --rc-muted: #8b949e;
+
+  --rc-danger: #f85149;
+  --rc-danger-bg: #3d1518;
+  --rc-success: #3fb950;
+  --rc-success-bg: #12261e;
+  --rc-bg-deep: #080b0f;
+  --rc-danger-deep: #5c1f1c;
+  --rc-success-deep: #1b3a25;
+  --rc-muted-2: #7d8590;
+  --rc-muted-3: #6e7681;
+  --rc-accent-warm: #d29922;
+}
+
+/* Neon city nights: magenta over deep violet, cyan as the second voice. */
+html[data-theme='night-city'] {
+  --rc-bg: #050414;
+  --rc-surface: #09071d;
+  --rc-surface-2: #0d0927;
+  --rc-surface-3: #150e38;
+  --rc-input-bg: #040310;
+
+  --rc-accent: #ff2eea;
+  --rc-accent-hot: #ff7bf2;
+  --rc-accent-dim: #d41cc0;
+  --rc-accent-deep: #5c0b52;
+  --rc-accent-bg: #1d0a2a;
+
+  --rc-text: #e6dcff;
+  --rc-text-strong: #fff8ff;
+  --rc-muted: #9a8ac8;
+
+  --rc-danger: #ff3d7f;
+  --rc-danger-bg: #2c0918;
+  --rc-success: #42ffb8;
+  --rc-success-bg: #06251c;
+  --rc-bg-deep: #030210;
+  --rc-danger-deep: #4a0d24;
+  --rc-success-deep: #0a3a2c;
+  --rc-muted-2: #7e6fb0;
+  --rc-muted-3: #5f5390;
+  --rc-accent-warm: #ffe15a;
+}
+
+/* Chrome neon. Shares the family yellow with the default theme but sits on a
+   near-black red-tinted base rather than an olive one. */
+html[data-theme='cyberpunk'] {
+  --rc-bg: #050207;
+  --rc-surface: #0b030a;
+  --rc-surface-2: #140510;
+  --rc-surface-3: #220715;
+  --rc-input-bg: #030106;
+
+  --rc-accent: #fcee0a;
+  --rc-accent-hot: #fff45c;
+  --rc-accent-dim: #d4c706;
+  --rc-accent-deep: #5c5503;
+  --rc-accent-bg: #1e1a03;
+
+  --rc-text: #fff9e7;
+  --rc-text-strong: #ffffff;
+  --rc-muted: #a15d68;
+
+  --rc-danger: #ff3049;
+  --rc-danger-bg: #2b060f;
+  --rc-success: #00ff9f;
+  --rc-success-bg: #04241a;
+  --rc-bg-deep: #020105;
+  --rc-danger-deep: #4d0913;
+  --rc-success-deep: #053024;
+  --rc-muted-2: #8a4c56;
+  --rc-muted-3: #6b3a42;
+  --rc-accent-warm: #fff45c;
+}
+
+/* Amber interface: warm gold on black, the quietest of the cinematic set. */
+html[data-theme='deus-ex'] {
+  --rc-bg: #06060a;
+  --rc-surface: #0d0d0f;
+  --rc-surface-2: #14130f;
+  --rc-surface-3: #1f1c14;
+  --rc-input-bg: #050507;
+
+  --rc-accent: #f2c94c;
+  --rc-accent-hot: #ffe08a;
+  --rc-accent-dim: #c9a52f;
+  --rc-accent-deep: #5e4a12;
+  --rc-accent-bg: #1e1806;
+
+  --rc-text: #e8dcc0;
+  --rc-text-strong: #fff6e0;
+  --rc-muted: #97886a;
+
+  --rc-danger: #e2593b;
+  --rc-danger-bg: #2a0f08;
+  --rc-success: #9bb85a;
+  --rc-success-bg: #17200c;
+  --rc-bg-deep: #030304;
+  --rc-danger-deep: #4a1a0d;
+  --rc-success-deep: #26301a;
+  --rc-muted-2: #7d7157;
+  --rc-muted-3: #5d5442;
+  --rc-accent-warm: #d8a93a;
+}

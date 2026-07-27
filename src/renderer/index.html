@@ -8,6 +8,9 @@
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
     />
     <title>RadioChron Desktop</title>
+    <!-- Sets data-theme before the stylesheet paints, so switching to a light
+         theme does not flash the dark default on every launch. -->
+    <script src="./theme-boot.js"></script>
   </head>
   <body>
     <div id="root"></div>
