@@ -9,6 +9,11 @@ This is a separate Electron repository. It imports the public Node API from
 the [`radiochron`](https://github.com/sergii-ziborov/radiochron) Rust IoT core
 through its packaged native Node adapter.
 
+Development currently depends on
+`github:sergii-ziborov/radiochron-js#main` (core `0.6` incident / history APIs).
+Pin a published npm `radiochron` version once that package is released, not a
+random Git SHA.
+
 > Open-source beta. Download the unsigned test installers from
 > [`desktop-v0.2.0-beta.3`](https://github.com/sergii-ziborov/radiochron-electron/releases/tag/desktop-v0.2.0-beta.3).
 > Windows SmartScreen and macOS Gatekeeper may warn because this beta is not

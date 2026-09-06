@@ -70,6 +70,7 @@ export async function createBaselineDiagnosticsBundle(
   ]);
 
   const result: BaselineDiagnosticsBundleResult = {
+    // Precursor format. Family transfer format is `radiochron.incident_bundle.v1` (`.rchron`).
     schema: 'wifi.baseline_diagnostics.v1',
     bundle_id: bundleId,
     out_dir: outDir,

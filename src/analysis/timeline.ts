@@ -63,6 +63,9 @@ export function buildClientTimeline(
 }
 
 export function classifyWlanEvent(event: Pick<WindowsWifiEvent, 'event_id' | 'raw_message'>): ClientLifecycleAction {
+  // Prefer numeric Event IDs only. Localized `raw_message` heuristics are
+  // deprecated — RadioChron core/history owns causal meaning via ConnectionId
+  // continuity. Unknown IDs stay `other` for UI projection.
   switch (event.event_id) {
     case 8001:
       return 'connected';
@@ -82,8 +85,44 @@ export function classifyWlanEvent(event: Pick<WindowsWifiEvent, 'event_id' | 'ra
     case 11010:
       return 'security_started';
     default:
-      return classifyByMessage(event.raw_message);
+      return 'other';
   }
+}
+
+/**
+ * @deprecated Localized English message matching. Do not use for cause/reconnect
+ * semantics — prefer `radiochron.history()` / core `events::detect`. Kept only
+ * so old fixtures can still be inspected during migration.
+ */
+export function classifyByMessage(rawMessage: string): ClientLifecycleAction {
+  const normalized = rawMessage.toLowerCase();
+
+  if (normalized.includes('successfully connected')) {
+    return 'connected';
+  }
+  if (normalized.includes('disconnected')) {
+    return 'disconnected';
+  }
+  if (normalized.includes('association succeeded')) {
+    return 'association_succeeded';
+  }
+  if (normalized.includes('association failed')) {
+    return 'association_failed';
+  }
+  if (normalized.includes('association started')) {
+    return 'association_started';
+  }
+  if (normalized.includes('security succeeded')) {
+    return 'security_succeeded';
+  }
+  if (normalized.includes('security started')) {
+    return 'security_started';
+  }
+  if (normalized.includes('security stopped')) {
+    return 'security_stopped';
+  }
+
+  return 'other';
 }
 
 export function detectReconnectLoops(
@@ -173,37 +212,6 @@ function groupCycles(timeline: ClientTimelineEvent[]): Map<string, CycleGroup[]>
   }
 
   return groups;
-}
-
-function classifyByMessage(rawMessage: string): ClientLifecycleAction {
-  const normalized = rawMessage.toLowerCase();
-
-  if (normalized.includes('successfully connected')) {
-    return 'connected';
-  }
-  if (normalized.includes('disconnected')) {
-    return 'disconnected';
-  }
-  if (normalized.includes('association succeeded')) {
-    return 'association_succeeded';
-  }
-  if (normalized.includes('association failed')) {
-    return 'association_failed';
-  }
-  if (normalized.includes('association started')) {
-    return 'association_started';
-  }
-  if (normalized.includes('security succeeded')) {
-    return 'security_succeeded';
-  }
-  if (normalized.includes('security started')) {
-    return 'security_started';
-  }
-  if (normalized.includes('security stopped')) {
-    return 'security_stopped';
-  }
-
-  return 'other';
 }
 
 function firstLine(rawMessage: string): string {
